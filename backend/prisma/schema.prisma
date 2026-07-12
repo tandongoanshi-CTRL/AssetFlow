@@ -178,7 +178,11 @@ model Allocation {
   updatedAt             DateTime          @updatedAt @map("updated_at")
 
   @@map("allocations")
+
+  @@index([assetId])
 }
+
+
 
 model TransferRequest {
   id                  String         @id @default(uuid()) @db.Uuid

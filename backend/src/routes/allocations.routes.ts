@@ -1,22 +1,12 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { Router } from 'express';
 import { createAllocation } from '../services/allocation.service';
-import { requireAuth, AuthRequest } from '../middleware/auth';
+import { requireAuth } from '../middleware/auth';
+import { requireRoles } from '../middleware/rbac';
 import { prisma } from '../db/prisma';
 
 const allocationsRouter = Router();
 
-function requireRole(roles: string[]) {
-  return (req: Request, res: Response, next: NextFunction) => {
-    const authReq = req as AuthRequest;
-    if (!authReq.auth || !roles.includes(authReq.auth.role)) {
-      res.status(403).json({ error: 'Forbidden' });
-      return;
-    }
-    next();
-  };
-}
-
-allocationsRouter.post('/', requireAuth, requireRole(['ASSET_MANAGER', 'ADMIN']), async (req, res) => {
+allocationsRouter.post('/', requireAuth, requireRoles(['ASSET_MANAGER', 'ADMIN']), async (req, res) => {
   try {
     const allocation = await createAllocation(req.body);
     res.status(201).json({ allocation });

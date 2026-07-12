@@ -1,20 +1,9 @@
-import { NextFunction, Request, Response, Router } from 'express';
-import { prisma } from '../db/prisma';
-import { requireAuth, AuthRequest } from '../middleware/auth';
+import { Router } from 'express';
+import { requireAuth } from '../middleware/auth';
+import { requireRoles } from '../middleware/rbac';
 import { createTransferRequest, approveTransferRequest } from '../services/transfer.service';
 
 const transfersRouter = Router();
-
-function requireRole(roles: string[]) {
-  return (req: Request, res: Response, next: NextFunction) => {
-    const authReq = req as AuthRequest;
-    if (!authReq.auth || !roles.includes(authReq.auth.role)) {
-      res.status(403).json({ error: 'Forbidden' });
-      return;
-    }
-    next();
-  };
-}
 
 transfersRouter.post('/', requireAuth, async (req, res) => {
   try {
@@ -30,7 +19,7 @@ transfersRouter.post('/', requireAuth, async (req, res) => {
   }
 });
 
-transfersRouter.patch('/:id/approve', requireAuth, requireRole(['ASSET_MANAGER', 'DEPT_HEAD', 'ADMIN']), async (req, res) => {
+transfersRouter.patch('/:id/approve', requireAuth, requireRoles(['ASSET_MANAGER', 'DEPT_HEAD', 'ADMIN']), async (req, res) => {
   try {
     const result = await approveTransferRequest(req.params.id);
     res.json({ result });

@@ -4,20 +4,11 @@ exports.allocationsRouter = void 0;
 const express_1 = require("express");
 const allocation_service_1 = require("../services/allocation.service");
 const auth_1 = require("../middleware/auth");
+const rbac_1 = require("../middleware/rbac");
 const prisma_1 = require("../db/prisma");
 const allocationsRouter = (0, express_1.Router)();
 exports.allocationsRouter = allocationsRouter;
-function requireRole(roles) {
-    return (req, res, next) => {
-        const authReq = req;
-        if (!authReq.auth || !roles.includes(authReq.auth.role)) {
-            res.status(403).json({ error: 'Forbidden' });
-            return;
-        }
-        next();
-    };
-}
-allocationsRouter.post('/', auth_1.requireAuth, requireRole(['ASSET_MANAGER', 'ADMIN']), async (req, res) => {
+allocationsRouter.post('/', auth_1.requireAuth, (0, rbac_1.requireRoles)(['ASSET_MANAGER', 'ADMIN']), async (req, res) => {
     try {
         const allocation = await (0, allocation_service_1.createAllocation)(req.body);
         res.status(201).json({ allocation });
