@@ -1,0 +1,576 @@
+/* ==========================================================================
+   GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #EEF2F7;
+  color: #0F172A;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   TOP NAVBAR
+   ========================================================================== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 24px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E5E9EF;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.brand-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 22px;
+}
+
+.nav-link {
+  font-size: 14px;
+  color: #64748B;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: #0F172A;
+  font-weight: 600;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   BUTTONS (shared across navbar + main content)
+   ========================================================================== */
+.btn {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-dark {
+  background-color: #1E293B;
+  color: #FFFFFF;
+  padding: 9px 16px;
+}
+
+.btn-dark svg {
+  width: 15px;
+  height: 15px;
+}
+
+.btn-outline {
+  background-color: #FFFFFF;
+  color: #334155;
+  border: 1px solid #E2E8F0;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.btn-danger-solid {
+  background-color: #7F1D1D;
+  color: #FFFFFF;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.btn-outline-block {
+  width: 100%;
+  justify-content: center;
+  background-color: #FFFFFF;
+  color: #334155;
+  border: 1px solid #E2E8F0;
+  padding: 10px;
+  margin-top: 16px;
+}
+
+.btn-plus {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.avatar-btn {
+  background-color: #94A3B8;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.avatar-initials {
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   PAGE BODY: SIDEBAR + MAIN CONTENT WRAPPER
+   ========================================================================== */
+.page-body {
+  display: flex;
+  min-height: calc(100vh - 56px);
+}
+
+/* ==========================================================================
+   LEFT SIDEBAR
+   ========================================================================== */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: #FFFFFF;
+  border-right: 1px solid #E5E9EF;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo-box {
+  width: 30px;
+  height: 30px;
+  background-color: #1E293B;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-box svg {
+  width: 15px;
+  height: 15px;
+}
+
+.sidebar-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.2;
+}
+
+.sidebar-subtitle {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #94A3B8;
+  margin-top: 1px;
+}
+
+.sidebar-nav {
+  list-style: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 7px;
+  font-size: 14px;
+  color: #334155;
+  cursor: pointer;
+  margin-bottom: 3px;
+  transition: background-color 0.15s ease;
+}
+
+.nav-item:hover {
+  background-color: #F1F5F9;
+}
+
+.nav-item.active {
+  background-color: #1E293B;
+  color: #FFFFFF;
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: #64748B;
+}
+
+.nav-item.active .nav-icon {
+  color: #FFFFFF;
+}
+
+.nav-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.nav-item.active .nav-icon svg rect {
+  fill: #FFFFFF;
+  stroke: none;
+}
+
+.nav-label {
+  line-height: 1.3;
+}
+
+.sidebar-footer {
+  border-top: 1px solid #E5E9EF;
+  padding-top: 14px;
+  margin-top: 14px;
+}
+
+.nav-item-danger {
+  color: #DC2626;
+}
+
+.nav-item-danger .nav-icon {
+  color: #DC2626;
+}
+
+.nav-item-danger:hover {
+  background-color: #FEF2F2;
+}
+
+/* ==========================================================================
+   MAIN CONTENT AREA
+   ========================================================================== */
+.main-content {
+  flex-grow: 1;
+  padding: 28px 32px;
+}
+
+.page-header {
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: #64748B;
+}
+
+/* ==========================================================================
+   SHARED CARD STYLE
+   ========================================================================== */
+.card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.card-subtitle {
+  font-size: 13px;
+  color: #94A3B8;
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+
+.info-icon,
+.section-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.section-icon {
+  margin-right: 4px;
+}
+
+.card-header .card-title {
+  display: flex;
+  align-items: center;
+}
+
+/* Status tag used in the Maintenance Frequency card header */
+.status-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0D9488;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #0D9488;
+}
+
+/* ==========================================================================
+   CHART ROW (bar chart + line chart)
+   ========================================================================== */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.bar-chart,
+.line-chart {
+  width: 100%;
+  height: 140px;
+  display: block;
+}
+
+.bar-rect {
+  fill: #1E293B;
+}
+
+.line-path {
+  fill: none;
+  stroke: #0D9488;
+  stroke-width: 2.5;
+}
+
+.line-dot {
+  fill: #0D9488;
+}
+
+.chart-x-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: 0 4px;
+}
+
+.chart-x-labels span {
+  font-size: 12px;
+  color: #94A3B8;
+}
+
+/* ==========================================================================
+   MOST USED / IDLE ASSETS LISTS
+   ========================================================================== */
+.lists-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.usage-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid #F1F5F9;
+}
+
+.usage-row:first-of-type {
+  border-top: none;
+}
+
+.usage-tag {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.usage-name {
+  font-size: 12.5px;
+  color: #94A3B8;
+  margin-top: 2px;
+}
+
+.usage-sublabel {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sublabel-neutral {
+  color: #334155;
+}
+
+.sublabel-warning {
+  color: #B45309;
+}
+
+.sublabel-danger {
+  color: #DC2626;
+}
+
+/* ==========================================================================
+   MAINTENANCE DUE CARD
+   ========================================================================== */
+.maintenance-due-card {
+  margin-bottom: 24px;
+}
+
+.due-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-top: 1px solid #F1F5F9;
+}
+
+.due-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.due-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.due-icon-box svg {
+  width: 17px;
+  height: 17px;
+}
+
+.due-icon-danger {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+}
+
+.due-icon-neutral {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.due-tag {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.due-detail {
+  font-size: 13px;
+  color: #94A3B8;
+  margin-top: 2px;
+}
+
+.export-row {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   PAGE FOOTER
+   ========================================================================== */
+.page-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background-color: #E9EEF5;
+  border-top: 1px solid #E2E8F0;
+  font-size: 12.5px;
+  color: #64748B;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-brand {
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #64748B;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #334155;
+}

@@ -1,0 +1,208 @@
+<!-- ============ TOP NAVBAR ============ -->
+<header class="navbar">
+  <div class="navbar-brand">
+    <div class="logo-box">A</div>
+    <span class="brand-name">AssetFlow</span>
+  </div>
+
+  <nav class="navbar-links">
+    <a href="#" class="nav-link">Dashboard</a>
+    <a href="#" class="nav-link">Assets</a>
+    <a href="#" class="nav-link">Analytics</a>
+  </nav>
+
+  <div class="navbar-icons">
+    <button class="icon-btn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" stroke="#475569" stroke-width="1.5"/>
+      </svg>
+      <span class="notif-dot"></span>
+    </button>
+    <button class="icon-btn" aria-label="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+    <button class="avatar-btn" aria-label="User account">
+      <span class="avatar-initials">JD</span>
+    </button>
+  </div>
+</header>
+
+<div class="page-body">
+
+  <!-- ============ LEFT SIDEBAR ============ -->
+  <!--
+    NOTE: if your app already has a shared shell/layout component rendering
+    the navbar + sidebar around every routed page, delete this entire
+    <aside> block (and the <header> above) and keep everything from
+    <main class="main-content"> down.
+  -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-header">
+        <h1 class="sidebar-title">ASSETFLOW</h1>
+        <p class="sidebar-subtitle">Enterprise Resource</p>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li class="nav-item" (click)="onNavClick('dashboard')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+            </svg>
+          </span>
+          <span class="nav-label">Dashboard</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('organization-setup')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 21V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v16M12 21v-6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6"/>
+              <path d="M8 7h.01M8 11h.01M8 15h.01"/>
+            </svg>
+          </span>
+          <span class="nav-label">Organization Setup</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('assets')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 8l-9-5-9 5 9 5 9-5z"/>
+              <path d="M3 8v8l9 5 9-5V8"/>
+              <path d="M12 13v8"/>
+            </svg>
+          </span>
+          <span class="nav-label">Assets</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('allocation-transfer')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 3l4 4-4 4M21 7H7"/>
+              <path d="M7 21l-4-4 4-4M3 17h14"/>
+            </svg>
+          </span>
+          <span class="nav-label">Allocation &amp; Transfer</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('booking')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="4" width="18" height="17" rx="2"/>
+              <path d="M3 9h18M8 2v4M16 2v4"/>
+            </svg>
+          </span>
+          <span class="nav-label">Resource Booking</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('maintenance')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </span>
+          <span class="nav-label">Maintenance</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('audit')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="4" width="16" height="16" rx="3"/>
+              <path d="M8 12l2.5 2.5L16 9"/>
+            </svg>
+          </span>
+          <span class="nav-label">Audit</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('reports')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4h16v16H4z"/>
+              <path d="M8 16v-4M12 16V8M16 16v-2"/>
+            </svg>
+          </span>
+          <span class="nav-label">Reports</span>
+        </li>
+        <!-- Notifications is the active page here -->
+        <li class="nav-item active" (click)="onNavClick('notifications')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.7 21a2 2 0 0 1-3.4 0"/>
+            </svg>
+          </span>
+          <span class="nav-label">Notifications</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bottom-fixed Support box -->
+    <div class="sidebar-support-box">
+      <p class="support-label">SUPPORT</p>
+      <a href="#" class="support-link">Help Center</a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="main-content">
+
+    <!-- Page header row: title/subtitle left, action buttons right -->
+    <div class="page-header-row">
+      <div>
+        <h2 class="page-title">Notifications &amp; Activity Logs</h2>
+        <p class="page-subtitle">Track asset movements, system updates, and critical alerts in real-time.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline" (click)="onMarkAllAsRead()">Mark all as read</button>
+        <button class="btn btn-dark" (click)="onExportLogs()">Export Logs</button>
+      </div>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs">
+      <button class="filter-tab" [class.active]="activeFilter === 'All'" (click)="setFilter('All')">All</button>
+      <button class="filter-tab" [class.active]="activeFilter === 'Alerts'" (click)="setFilter('Alerts')">Alerts</button>
+      <button class="filter-tab" [class.active]="activeFilter === 'Approvals'" (click)="setFilter('Approvals')">Approvals</button>
+      <button class="filter-tab" [class.active]="activeFilter === 'Bookings'" (click)="setFilter('Bookings')">Bookings</button>
+    </div>
+
+    <!-- Notification feed -->
+    <div class="notif-card">
+      <div class="notif-row" *ngFor="let item of filteredNotifications">
+        <div class="notif-icon" [ngClass]="'icon-' + item.icon">
+          <svg *ngIf="item.icon === 'person'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>
+          </svg>
+          <svg *ngIf="item.icon === 'approval'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/>
+          </svg>
+          <svg *ngIf="item.icon === 'booking'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/>
+          </svg>
+          <svg *ngIf="item.icon === 'transfer'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 3l4 4-4 4M21 7H7"/><path d="M7 21l-4-4 4-4M3 17h14"/>
+          </svg>
+          <svg *ngIf="item.icon === 'warning'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <svg *ngIf="item.icon === 'danger'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+
+        <div class="notif-text">
+          <p class="notif-title">
+            <span *ngFor="let part of item.titleParts"
+                  [ngClass]="{ 'part-bold': part.style === 'bold', 'part-link': part.style === 'link' }">{{ part.text }}</span>
+          </p>
+          <p class="notif-detail" [ngClass]="{ 'detail-warning': item.detailTone === 'warning' }">{{ item.detail }}</p>
+        </div>
+
+        <span class="notif-time">{{ item.timeAgo }}</span>
+      </div>
+
+      <button class="view-older-row" (click)="onViewOlderActivity()">View Older Activity</button>
+    </div>
+
+  </main>
+</div>

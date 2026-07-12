@@ -1,0 +1,327 @@
+<!-- ============ TOP NAVBAR ============ -->
+<header class="navbar">
+  <div class="navbar-left">
+    <span class="brand-name">AssetFlow</span>
+    <nav class="navbar-links">
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Resources</a>
+      <a href="#" class="nav-link active">Reports</a>
+      <a href="#" class="nav-link">Settings</a>
+    </nav>
+  </div>
+
+  <div class="navbar-right">
+    <button class="btn btn-dark" (click)="onNewAsset()">New Asset</button>
+    <button class="icon-btn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" stroke="#475569" stroke-width="1.5"/>
+      </svg>
+    </button>
+    <button class="icon-btn" aria-label="Help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </button>
+    <button class="avatar-btn" aria-label="User account">
+      <span class="avatar-initials">JD</span>
+    </button>
+  </div>
+</header>
+
+<div class="page-body">
+
+  <!-- ============ LEFT SIDEBAR ============ -->
+  <!--
+    NOTE: if your app already has a shared shell/layout component rendering
+    the navbar + sidebar around every routed page, delete this entire
+    <aside> block (and the <header> above) and keep everything from
+    <main class="main-content"> down.
+  -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-header">
+        <div class="logo-box">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="7" height="7" rx="1" fill="white"/>
+            <rect x="14" y="3" width="7" height="7" rx="1" fill="white"/>
+            <rect x="3" y="14" width="7" height="7" rx="1" fill="white"/>
+            <rect x="14" y="14" width="7" height="7" rx="1" fill="white"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="sidebar-title">AssetFlow</h1>
+          <p class="sidebar-subtitle">ENTERPRISE RESOURCE</p>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li class="nav-item" (click)="onNavClick('dashboard')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+            </svg>
+          </span>
+          <span class="nav-label">Dashboard</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('organization')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="7" width="18" height="13" rx="2"/>
+              <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+          </span>
+          <span class="nav-label">Organization</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('assets')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M3 10h18"/>
+            </svg>
+          </span>
+          <span class="nav-label">Assets</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('allocations')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 3l4 4-4 4M21 7H7"/>
+              <path d="M7 21l-4-4 4-4M3 17h14"/>
+            </svg>
+          </span>
+          <span class="nav-label">Allocations</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('resources')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </span>
+          <span class="nav-label">Resources</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('maintenance')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4z"/>
+            </svg>
+          </span>
+          <span class="nav-label">Maintenance</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('audit')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8.5 12.5l2.5 2.5 4.5-5"/>
+            </svg>
+          </span>
+          <span class="nav-label">Audit</span>
+        </li>
+        <!-- Reports is the active page here -->
+        <li class="nav-item active" (click)="onNavClick('reports')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </span>
+          <span class="nav-label">Reports</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('notifications')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.7 21a2 2 0 0 1-3.4 0"/>
+            </svg>
+          </span>
+          <span class="nav-label">Notifications</span>
+        </li>
+      </ul>
+
+      <button class="btn btn-outline-block" (click)="onAddResource()">
+        <span class="btn-plus">+</span> Add Resource
+      </button>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="nav-item" (click)="onNavClick('support')">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+            <path d="M21 19a2 2 0 0 1-2 2h-1v-8h3zM3 19a2 2 0 0 0 2 2h1v-8H3z"/>
+          </svg>
+        </span>
+        <span class="nav-label">Support</span>
+      </div>
+      <div class="nav-item nav-item-danger" (click)="onLogout()">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <path d="M16 17l5-5-5-5"/>
+            <path d="M21 12H9"/>
+          </svg>
+        </span>
+        <span class="nav-label">Log Out</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="main-content">
+
+    <div class="page-header">
+      <h2 class="page-title">Reports &amp; Analytics</h2>
+      <p class="page-subtitle">Track utilization, maintenance, and booking trends across your organization.</p>
+    </div>
+
+    <!-- Chart cards row -->
+    <div class="chart-row">
+
+      <!-- Utilization by department: bar chart -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Utilization by department</h3>
+          <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+        </div>
+
+        <svg class="bar-chart" viewBox="0 0 420 160" preserveAspectRatio="none">
+          <rect *ngFor="let dept of utilizationData; let i = index"
+                [attr.x]="barX(i)"
+                [attr.y]="barY(dept.utilizationPercent)"
+                [attr.width]="barWidth()"
+                [attr.height]="barHeight(dept.utilizationPercent)"
+                rx="4" class="bar-rect"></rect>
+        </svg>
+        <div class="chart-x-labels">
+          <span *ngFor="let dept of utilizationData">{{ dept.department }}</span>
+        </div>
+      </div>
+
+      <!-- Maintenance Frequency: line chart -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Maintenance Frequency</h3>
+          <span class="status-tag">
+            <span class="status-dot"></span>
+            On Schedule
+          </span>
+        </div>
+
+        <svg class="line-chart" viewBox="0 0 420 160" preserveAspectRatio="none">
+          <polyline [attr.points]="linePoints" class="line-path" />
+          <circle *ngFor="let point of maintenanceFrequency; let i = index"
+                  [attr.cx]="linePointCoords(i).x"
+                  [attr.cy]="linePointCoords(i).y"
+                  r="4" class="line-dot"></circle>
+        </svg>
+        <div class="chart-x-labels">
+          <span *ngFor="let point of maintenanceFrequency">{{ point.month }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Most used / Idle assets row -->
+    <div class="lists-row">
+
+      <div class="card">
+        <div class="card-header">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 17l6-6 4 4 8-8"/>
+            <path d="M14 7h7v7"/>
+          </svg>
+          <h3 class="card-title">Most used assets</h3>
+        </div>
+
+        <div class="usage-row" *ngFor="let row of mostUsedAssets">
+          <div>
+            <p class="usage-tag">{{ row.tag }}</p>
+            <p class="usage-name">{{ row.name }}</p>
+          </div>
+          <span class="usage-sublabel" [ngClass]="toneClass(row.tone)">{{ row.subLabel }}</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="18" height="17" rx="2"/>
+            <path d="M3 9h18M8 2v4M16 2v4"/>
+          </svg>
+          <h3 class="card-title">Idle assets</h3>
+        </div>
+
+        <div class="usage-row" *ngFor="let row of idleAssets">
+          <div>
+            <p class="usage-tag">{{ row.tag }}</p>
+            <p class="usage-name">{{ row.name }}</p>
+          </div>
+          <span class="usage-sublabel" [ngClass]="toneClass(row.tone)">{{ row.subLabel }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Assets due for maintenance / nearing retirement -->
+    <div class="card maintenance-due-card">
+      <h3 class="card-title">Assets due for maintenance / nearing retirement</h3>
+      <p class="card-subtitle">System alerts based on service schedules and asset age.</p>
+
+      <div class="due-row" *ngFor="let row of maintenanceDueRows">
+        <div class="due-left">
+          <div class="due-icon-box" [ngClass]="row.icon === 'wrench' ? 'due-icon-danger' : 'due-icon-neutral'">
+            <svg *ngIf="row.icon === 'wrench'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4z"/>
+            </svg>
+            <svg *ngIf="row.icon === 'laptop'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20"/>
+            </svg>
+          </div>
+          <div>
+            <p class="due-tag">{{ row.tag }}</p>
+            <p class="due-detail">{{ row.detail }}</p>
+          </div>
+        </div>
+        <button class="btn"
+                [ngClass]="row.actionStyle === 'danger' ? 'btn-danger-solid' : 'btn-outline'"
+                (click)="onScheduleMaintenance(row)">
+          {{ row.actionLabel }}
+        </button>
+      </div>
+
+      <div class="export-row">
+        <button class="btn btn-dark" (click)="onExportReport()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3v12m0 0l-4-4m4 4l4-4"/>
+            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+          </svg>
+          Export report
+        </button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ============ PAGE FOOTER ============ -->
+<footer class="page-footer">
+  <div class="footer-left">
+    <span class="footer-brand">AssetFlow ERP</span>
+    <span class="footer-copyright">© 2024 AssetFlow ERP. All rights reserved.</span>
+  </div>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Security</a>
+  </div>
+</footer>

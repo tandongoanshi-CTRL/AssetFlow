@@ -1,0 +1,250 @@
+/* Base Global Standard Configuration Framework Reset Rules */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #F2F5F9;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Base Wrapper Container Container Component Alignment Styles */
+.signup-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 20px 40px 20px;
+}
+
+/* White Structured Core Interface Card Canvas Wrapper */
+.signup-card {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 550px;
+    border-radius: 16px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    padding: 48px 56px;
+}
+
+/* Header Text Blocks Container Positioning Box Styles */
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.app-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+}
+
+.app-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-top: 16px;
+    line-height: 1.2;
+}
+
+.app-subtitle {
+    font-size: 15px;
+    color: #64748B;
+    margin-top: 4px;
+}
+
+/* Form Input Layout Stack Structuring Rules */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 8px;
+}
+
+/* Form Input Field Component Baseline Framework Styles */
+.form-group input {
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #D9DEE5;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: #0F172A;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #94A3B8;
+}
+
+/* Active Highlight Focus Layout Transitions */
+.form-group input:focus {
+    border-color: #0F766E;
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+}
+
+/* Passwords Toggle Layout Positioning Frame */
+.input-password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #94A3B8;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password:hover {
+    color: #475569;
+}
+
+.eye-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Legal Option Group Interface Checkbox Flex Rules */
+.form-checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 4px;
+    margin-bottom: 32px;
+}
+
+.form-checkbox-row input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #D9DEE5;
+    border-radius: 4px;
+    outline: none;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin-right: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    position: relative;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.form-checkbox-row input[type="checkbox"]:checked {
+    background-color: #0F766E;
+    border-color: #0F766E;
+}
+
+.form-checkbox-row input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.form-checkbox-row input[type="checkbox"]:focus {
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+}
+
+.form-checkbox-row label {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #334155;
+    user-select: none;
+    cursor: pointer;
+}
+
+/* Primary Form Submit Button Component Rules */
+.submit-button {
+    width: 100%;
+    background-color: #1E293B;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #334155;
+}
+
+/* Divider Architecture Rule Component */
+.card-divider {
+    border: none;
+    border-top: 1px solid #E2E8F0;
+    margin: 24px 0;
+    width: 100%;
+}
+
+/* Alternative Registration Routing Footnote Link Styles */
+.card-footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer-text {
+    font-size: 14px;
+    color: #475569;
+}
+
+/* Teal Custom Standard Color Target Definitions */
+.teal-link {
+    color: #0F766E;
+    text-decoration: none;
+}
+
+.teal-link:hover {
+    text-decoration: underline;
+}
+
+.bold-link {
+    font-weight: 700;
+}
+
+/* Card External Context Notice Text block styles */
+.admin-notice {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #94A3B8;
+    text-align: center;
+    max-width: 450px;
+    margin-top: 24px;
+}

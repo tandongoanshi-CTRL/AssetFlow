@@ -1,0 +1,90 @@
+<!-- Main Wrapper Component -->
+<div class="signup-container">
+    
+    <!-- Central Card Interface -->
+    <main class="signup-card">
+        
+        <!-- Branding Header Branding Section -->
+        <header class="card-header">
+            <!-- Interlocking Geometric AssetFlow SVG Logo Asset Placeholder -->
+            <svg class="app-logo" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="56" height="56" rx="8" fill="#F8FAFC"/>
+                <path d="M16 16H40V22H22V28H34V34H22V40H16V16Z" fill="#1E3A5F"/>
+                <path d="M26 24H38V30H32V36H40V40H26V24Z" fill="#64748B" fill-opacity="0.7"/>
+                <path d="M30 18H36V22H30V18Z" fill="#94A3B8"/>
+            </svg>
+            <h1 class="app-title">AssetFlow</h1>
+            <p class="app-subtitle">Enterprise Asset & Resource Management</p>
+        </header>
+
+        <!-- Registration Data Form bound to component class submit action handler -->
+        <form (ngSubmit)="onSubmit()" #signupForm="ngForm" class="signup-form" novalidate>
+            
+            <!-- Full Name Field -->
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" [(ngModel)]="signupData.fullName" placeholder="John Doe" required>
+            </div>
+
+            <!-- Email Address Field -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" [(ngModel)]="signupData.email" placeholder="name@company.com" required>
+            </div>
+
+            <!-- Password Field Group -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-password-wrapper">
+                    <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="signupData.password" placeholder="••••••••" required>
+                    <button type="button" class="toggle-password" (click)="togglePasswordVisibility()" [style.color]="showPassword ? '#0F766E' : '#94A3B8'" aria-label="Toggle password visibility">
+                        <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Confirm Password Field Group -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="input-password-wrapper">
+                    <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirmPassword" name="confirmPassword" [(ngModel)]="signupData.confirmPassword" placeholder="••••••••" required>
+                    <button type="button" class="toggle-password" (click)="toggleConfirmPasswordVisibility()" [style.color]="showConfirmPassword ? '#0F766E' : '#94A3B8'" aria-label="Toggle password visibility">
+                        <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Terms and Privacy Legal Agreement Checkbox Option Group -->
+            <div class="form-checkbox-row">
+                <input type="checkbox" id="termsAgreement" name="termsAgreement" [(ngModel)]="signupData.termsAgreement" required>
+                <label for="termsAgreement">
+                    I agree to the <a href="#" class="teal-link">Terms of Service</a> and <a href="#" class="teal-link">Privacy Policy</a>
+                </label>
+            </div>
+
+            <!-- Submission Dispatch Action Control -->
+            <button type="submit" class="submit-button">Create Account</button>
+        </form>
+
+        <!-- Bottom Content Context Split Border Separator Line -->
+        <hr class="card-divider">
+
+        <!-- Alternative Routing Link Navigation Line mapping seamlessly into the app login route state -->
+        <footer class="card-footer">
+            <span class="footer-text">Already have an account? <a routerLink="/login" class="teal-link bold-link">Log in</a></span>
+        </footer>
+
+    </main>
+
+    <!-- Sub-Context Disclaimer Footer Content Box (Outside Card Layout Context) -->
+    <p class="admin-notice">
+        Account creation defaults strictly to standard Employee permissions. Administrative roles must be assigned via the admin panel after signup.
+    </p>
+
+</div>

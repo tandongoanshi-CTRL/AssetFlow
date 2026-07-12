@@ -1,0 +1,74 @@
+<div class="app-container">
+  <aside class="sidebar">
+    <div class="logo-box">
+      <div class="icon-square">🗄️</div>
+      <div class="logo-text"><strong>AssetFlow ERP</strong><br>Enterprise Suite</div>
+    </div>
+    
+    <nav class="nav-menu">
+      <a href="#">Assets</a>
+      <a href="#">Inventory</a>
+      <a href="#" class="active">Maintenance</a>
+      <a href="#">Procurement</a>
+      <a href="#">Analytics</a>
+      <a href="#">Admin</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <a href="#">Support</a>
+      <a href="#">Log Out</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-nav">
+      <input type="text" placeholder="🔍 Search maintenance logs..." class="search-input">
+      <div class="nav-links">Dashboard Resources Reports Settings 🔔 ❓</div>
+      <button class="new-asset-btn">+ New Asset</button>
+      <div class="user-avatar"></div>
+    </header>
+
+    <div class="page-body">
+      <h1>Maintenance Management</h1>
+      <p>Track repair and service requests through to resolution.</p>
+
+      <div class="kanban-container">
+        <section class="column">
+          <div class="col-head">Pending <span>1</span></div>
+          <div class="card">
+            <h4>AF-0062</h4>
+            <p>Projector bulb not turning on</p>
+            <div class="card-meta">👤 <span class="tag-urgent">URGENT</span></div>
+          </div>
+        </section>
+
+        <section class="column">
+          <div class="col-head">Approved <span>1</span></div>
+          <div class="card">
+            <h4>AF-003</h4>
+            <p>AC unit noisy compressor</p>
+            <div class="card-meta">✅ <span class="tag-success">BUDGET APPROVED</span></div>
+          </div>
+        </section>
+
+        <section class="column">
+          <div class="col-head">Technician assigned <span>1</span></div>
+          <div class="card">
+            <h4>AF-0078</h4>
+            <p>Forklift - maintenance</p>
+            <div class="card-meta">🛠️ R Varma</div>
+          </div>
+        </section>
+      </div>
+
+      <div class="notice-box">
+        ℹ️ Approving a card moves the asset to <strong>Under Maintenance</strong>; resolving returns it to <strong>Available</strong>.
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      <span><strong>AssetFlow</strong> © 2024 AssetFlow ERP. All rights reserved.</span>
+      <span>Privacy Policy | Terms of Service | Security</span>
+    </footer>
+  </main>
+</div>

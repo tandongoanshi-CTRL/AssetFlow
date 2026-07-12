@@ -1,0 +1,262 @@
+<!-- ============ TOP NAVBAR ============ -->
+<header class="navbar">
+  <div class="navbar-left">
+    <span class="brand-name">AssetFlow</span>
+    <nav class="navbar-links">
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Resources</a>
+      <a href="#" class="nav-link">Reports</a>
+      <a href="#" class="nav-link">Settings</a>
+    </nav>
+  </div>
+
+  <div class="navbar-right">
+    <button class="icon-btn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" stroke="#475569" stroke-width="1.5"/>
+      </svg>
+    </button>
+    <button class="icon-btn" aria-label="Help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </button>
+    <button class="avatar-btn" aria-label="User account">
+      <span class="avatar-initials">JD</span>
+    </button>
+    <button class="btn btn-dark" (click)="onNewAsset()">New Asset</button>
+  </div>
+</header>
+
+<div class="page-body">
+
+  <!-- ============ LEFT SIDEBAR ============ -->
+  <!--
+    NOTE: if your app already has a shared shell/layout component that
+    renders this navbar + sidebar around every routed page, delete this
+    entire <aside> block (and the <header> above) and just keep everything
+    from <main class="main-content"> down. Duplicating the shell in every
+    routed component works but isn't the normal Angular pattern.
+  -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-header">
+        <h1 class="sidebar-title">AssetFlow</h1>
+        <p class="sidebar-subtitle">Enterprise Resource</p>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li class="nav-item" (click)="onNavClick('dashboard')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+            </svg>
+          </span>
+          <span class="nav-label">Dashboard</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('organization')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="7" width="18" height="13" rx="2"/>
+              <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+          </span>
+          <span class="nav-label">Organization setup</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('assets')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M3 10h18"/>
+            </svg>
+          </span>
+          <span class="nav-label">Assets</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('allocation')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 3l4 4-4 4M21 7H7"/>
+              <path d="M7 21l-4-4 4-4M3 17h14"/>
+            </svg>
+          </span>
+          <span class="nav-label">Allocation &amp; Transfer</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('booking')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="4" width="18" height="17" rx="2"/>
+              <path d="M3 9h18M8 2v4M16 2v4"/>
+            </svg>
+          </span>
+          <span class="nav-label">Resource Booking</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('maintenance')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4z"/>
+            </svg>
+          </span>
+          <span class="nav-label">Maintenance</span>
+        </li>
+        <!-- Audit is the active page here -->
+        <li class="nav-item active" (click)="onNavClick('audit')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8.5 12.5l2.5 2.5 4.5-5"/>
+            </svg>
+          </span>
+          <span class="nav-label">Audit</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('reports')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </span>
+          <span class="nav-label">Reports</span>
+        </li>
+        <li class="nav-item" (click)="onNavClick('notifications')">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.7 21a2 2 0 0 1-3.4 0"/>
+            </svg>
+          </span>
+          <span class="nav-label">Notifications</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="nav-item" (click)="onNavClick('settings')">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </span>
+        <span class="nav-label">Settings</span>
+      </div>
+      <div class="nav-item" (click)="onNavClick('support')">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </span>
+        <span class="nav-label">Support</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="main-content">
+
+    <div class="page-header-row">
+      <div>
+        <h2 class="page-title">Asset Audit</h2>
+        <p class="page-subtitle">Perform scheduled physical verification of organization assets.</p>
+      </div>
+      <button class="btn btn-outline" (click)="onExportResults()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3v12m0 0l-4-4m4 4l4-4"/>
+          <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+        </svg>
+        Export Results
+      </button>
+    </div>
+
+    <!-- Audit context card -->
+    <div class="audit-context-card">
+      <div class="audit-context-left">
+        <div class="calendar-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4338CA" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="18" height="17" rx="2"/>
+            <path d="M3 9h18M8 2v4M16 2v4"/>
+          </svg>
+        </div>
+        <div>
+          <p class="audit-title-line">Q3 audit: Engineering dept – 1-15 Jul</p>
+          <p class="audit-auditors-line">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Auditors: A. Rao, S. Iqbal
+          </p>
+        </div>
+      </div>
+      <div class="avatar-stack">
+        <span class="stacked-avatar">AR</span>
+        <span class="stacked-avatar">SI</span>
+      </div>
+    </div>
+
+    <!-- Verification checklist table -->
+    <div class="table-wrap">
+      <div class="table-header">
+        <span class="col col-asset">ASSET</span>
+        <span class="col col-location">EXPECTED LOCATION</span>
+        <span class="col col-verification">VERIFICATION</span>
+      </div>
+
+      <div class="table-body">
+        <div class="table-row" *ngFor="let row of auditRows">
+          <div class="cell-asset">
+            <svg *ngIf="row.icon === 'laptop'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20"/></svg>
+            <svg *ngIf="row.icon === 'chair'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="3" width="12" height="10" rx="1"/><path d="M6 13v8M18 13v8M6 17h12"/></svg>
+            <svg *ngIf="row.icon === 'monitor'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
+            <span>{{ row.tag }} {{ row.name }}</span>
+          </div>
+          <div class="cell-location">{{ row.expectedLocation }}</div>
+          <div class="cell-verification">
+            <span class="status-pill" [ngClass]="verificationClass(row.verification)">{{ row.verification }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discrepancy alert banner: hidden automatically when there are 0 discrepancies -->
+    <div class="discrepancy-banner" *ngIf="discrepancyCount > 0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <span>{{ discrepancyText }}</span>
+    </div>
+
+    <!-- Divider + bottom action row -->
+    <div class="bottom-actions-row">
+      <button class="btn-text" (click)="onDiscardDraft()">Discard Draft</button>
+      <button class="btn btn-dark" (click)="onCloseAudit()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="11" width="16" height="10" rx="2"/>
+          <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        </svg>
+        Close audit cycle
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<!-- ============ PAGE FOOTER ============ -->
+<footer class="page-footer">
+  <span class="footer-copyright"><strong>AssetFlow ERP</strong> © 2024. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Security</a>
+  </div>
+</footer>

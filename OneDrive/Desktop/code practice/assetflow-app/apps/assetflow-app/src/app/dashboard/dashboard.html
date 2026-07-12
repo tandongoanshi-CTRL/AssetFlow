@@ -1,0 +1,114 @@
+<nav class="top-navbar">
+  <div class="nav-left">
+    <!-- Clean, inline logo layout matching the second image -->
+    <svg class="nav-logo" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7"></rect>
+      <rect x="14" y="3" width="7" height="7"></rect>
+      <rect x="14" y="14" width="7" height="7"></rect>
+      <rect x="3" y="14" width="7" height="7"></rect>
+    </svg>
+    <span class="brand-name">AssetFlow</span>
+  </div>
+
+  <div class="nav-center">
+    <a href="#" class="nav-link active">Dashboard</a>
+    <a href="#" class="nav-link">Assets</a>
+    <a href="#" class="nav-link">Analytics</a>
+  </div>
+
+  <div class="nav-right">
+    <button class="utility-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+    </button>
+    <button class="utility-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    </button>
+    <div class="user-avatar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    </div>
+  </div>
+</nav>
+
+<div class="workspace-container">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>AssetFlow</h2>
+      <p>Enterprise Resource</p>
+    </div>
+    
+    <ul class="sidebar-menu">
+      <li *ngFor="let item of SIDEBAR_NAV_CONFIG">
+        <a href="#" class="sidebar-item" [class.active]="item.isActive" (click)="mutateActiveState(item.id); $event.preventDefault()">
+          <!-- Native dynamic rendering of navigation icons -->
+          <span class="nav-icon-span" [ngClass]="item.iconClass"></span>
+          <span>{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+    
+    <hr class="sidebar-divider">
+    
+    <ul class="sidebar-menu bottom-menu">
+      <li *ngFor="let item of LOWER_NAV_CONFIG">
+        <a href="#" class="sidebar-item" (click)="$event.preventDefault()">
+          <span class="nav-icon-span" [ngClass]="item.iconClass"></span>
+          <span>{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <main class="content-frame">
+    <div class="dashboard-card">
+      <h1 class="section-title">Today's Overview</h1>
+      
+      <!-- Native Angular loops fix layout issues entirely -->
+      <div class="metrics-grid">
+        <div class="metric-cell" *ngFor="let dataCell of SYSTEM_METRICS_STORE">
+          <span class="metric-label">{{ dataCell.label }}</span>
+          <span class="metric-value">{{ dataCell.value }}</span>
+        </div>
+      </div>
+
+      <div class="alert-banner">
+        <div class="alert-content">
+          <div class="alert-icon-wrapper">
+            <svg class="alert-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <span class="alert-text">3 assets overdue for return – flagged for follow-up</span>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button class="btn btn-primary" (click)="triggerAction('Register')">
+          <span class="btn-icon">+</span> register asset
+        </button>
+        <button class="btn btn-secondary" (click)="triggerAction('Book')">Book resource</button>
+        <button class="btn btn-secondary" (click)="triggerAction('Request')">Raise requests</button>
+      </div>
+
+      <h2 class="sub-section-title">Recent Activity</h2>
+      
+      <ul class="activity-list">
+        <li class="activity-row" *ngFor="let rowItem of RECENT_ACTIVITY_STREAM">
+          <div class="activity-left">
+            <div class="icon-square" [ngClass]="rowItem.type">
+              <span class="activity-type-icon" [ngClass]="'icon-' + rowItem.type"></span>
+            </div>
+            <div class="activity-details">
+              <span class="activity-title">{{ rowItem.boldTitle }}</span> 
+              – {{ rowItem.text }}
+              <span *ngIf="rowItem.highlightText" class="txt-highlight"> – {{ rowItem.highlightText }}</span>
+              <span *ngIf="rowItem.deptText" class="txt-dept"> – {{ rowItem.deptText }}</span>
+            </div>
+          </div>
+          <span class="activity-time">{{ rowItem.timestamp }}</span>
+        </li>
+      </ul>
+    </div>
+  </main>
+</div>
