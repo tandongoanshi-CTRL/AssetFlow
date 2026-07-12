@@ -1,0 +1,2 @@
+// This file has been deprecated. The AppComponent is now defined in app.ts
+// Please use app.ts for the main application component

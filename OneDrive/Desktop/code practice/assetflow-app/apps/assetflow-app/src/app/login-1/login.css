@@ -1,0 +1,234 @@
+/* Container layout to center the login block on page */
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Soft clean background similar to odoo.com */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Central Card UI Box */
+.login-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 440px;
+  padding: 40px 35px;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Soft enterprise micro shadow */
+  box-sizing: border-box;
+}
+
+/* Header & Logo styling */
+.brand-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-box img {
+  width: 64px;          /* Sets a perfect, clean icon width */
+  height: 64px;         /* Keeps it perfectly square */
+  object-fit: contain;  /* Makes sure the image doesn't distort or stretch */
+  margin-bottom: 12px;  /* Pushes the text below it down slightly */
+}
+
+.brand-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 6px 0;
+}
+
+.brand-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Form inputs & Typography spacing */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Input Fields styling matching reference images */
+input[type="email"],
+.password-input-container input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #1f2937;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: #1a2d42; /* Focus boundary color match to dark button */
+}
+
+/* Links & Text Highlights styling */
+.forgot-link {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #00665c; /* Serious deep green accent color */
+  text-decoration: none;
+}
+
+.forgot-link:hover, .signup-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Secure Visibility Toggle Engine */
+.password-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.visibility-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Custom Checkbox Frame style */
+.form-options {
+  margin-top: -4px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 26px;
+  cursor: pointer;
+  font-size: 13.5px;
+  color: #4b5563;
+  user-select: none;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 16px;
+  width: 16px;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #1a2d42;
+  border-color: #1a2d42;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Premium Primary Call to Action Button */
+.btn-submit {
+  width: 100%;
+  background-color: #1a2d42; /* Premium corporate dark slate */
+  color: #ffffff;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+}
+
+.btn-submit:hover {
+  background-color: #111e2d;
+}
+
+/* Footer Section formatting layout */
+.divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 25px 0;
+}
+
+.signup-footer {
+  text-align: center;
+  font-size: 13.5px;
+  color: #4b5563;
+}
+
+.signup-footer a {
+  color: #00665c;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Outer Bottom Warning Message block */
+.system-notice {
+  max-width: 440px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #9ca3af;
+  margin-top: 24px;
+}
