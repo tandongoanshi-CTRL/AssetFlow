@@ -1,110 +1,105 @@
 # AssetFlow
 
-ODOO HACKATHON 2026
+AssetFlow is a full-stack asset lifecycle management platform built as a monorepo. The project combines a Node.js + TypeScript + Express backend with a React + Vite frontend to cover authentication, role-based access, allocation workflows, transfers, bookings, maintenance handling, audits, and overdue allocation tracking.
 
-AssetFlow is an assets lifecycle project (Node.js + TypeScript + Express + Prisma/PostgreSQL). It supports:
-- Authentication (JWT)
-- Role-based access control (RBAC)
-- Asset allocations, transfers, bookings, maintenance requests
-- Audit cycles
-- A daily cron job to mark overdue allocations
+## What the project includes
 
----
+- User authentication with JWT-based login and signup flows
+- Role-based access control for employees, department heads, asset managers, and admins
+- Asset allocation management, including creation and listing of allocations
+- Transfer requests and approval workflows
+- Resource booking creation and viewing
+- Maintenance request submission and status updates
+- Audit cycle closure flows for administrators
+- A cron worker that marks overdue allocations and creates notifications
 
-## Base URL
-- API: `http://localhost:<PORT>/api`
-- Healthcheck: `GET /health`
+## Tech stack
 
----
+- Backend: Node.js, TypeScript, Express, Prisma, PostgreSQL, JWT, bcrypt, node-cron
+- Frontend: React, TypeScript, Vite, React Router
 
-## Quickstart (Full Stack)
+## Repository structure
 
-AssetFlow is split into:
-- Backend: `backend/` (Express + Prisma)
-- Frontend: `frontend/` (React + Vite)
+- backend/: Express API, Prisma schema, migrations, services, and route handlers
+- frontend/: React/Vite client with authenticated pages for allocations, transfers, bookings, maintenance, audits, and admin workflows
+- README.md: project overview and setup instructions
 
----
+## Prerequisites
 
-## Backend
+- Node.js 18+ (20+ recommended)
+- PostgreSQL 14+
+- npm
 
-### 1) Set environment variables
-Create a `.env` file in `backend/`:
+## Quick start
+
+### 1) Create the database
+
+Create a PostgreSQL database named `assetflow` before running the backend.
+
+### 2) Configure environment variables
+
+Create a `.env` file in the `backend/` directory:
 
 ```env
 PORT=3000
 DATABASE_URL=postgresql://user:pass@localhost:5432/assetflow
-CORS_ORIGIN=*
+CORS_ORIGIN=http://localhost:5173
 JWT_SECRET=change-me-in-production
 SESSION_TTL_SECONDS=3600
 ```
 
-### 2) Install + migrate
+Create a `.env` file in the `frontend/` directory:
+
+```env
+VITE_API_BASE_URL=http://localhost:3000/api
+```
+
+### 3) Install dependencies and prepare the database
+
 From the `backend/` directory:
 
 ```bash
 npm install
-npm run prisma:migrate
 npm run prisma:generate
+npm run prisma:migrate
+npm run prisma:seed
 ```
 
-### 3) Run
+The seed step is optional but helps populate initial data for local testing.
+
+### 4) Start the backend
 
 ```bash
+cd backend
 npm run dev
 ```
 
-Cron workers are started automatically when the server boots.
+The backend will start on `http://localhost:3000` and expose the API under `/api`.
 
----
+### 5) Start the frontend
 
-## Frontend
+In a second terminal:
 
-Follow `frontend/README.md` for how to set `frontend/.env` and run the dev server.
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
+The Vite development server will run on `http://localhost:5173`.
 
-
-## Authentication
-- Endpoints that require authentication expect:
-  - `Authorization: Bearer <token>`
-- Token is returned from:
-  - `POST /api/auth/login`
-  - `POST /api/auth/signup`
-- `GET /api/auth/me` returns the authenticated user.
-
----
-
-## Roles (RBAC)
-User roles supported by the backend:
-- `EMPLOYEE`
-- `DEPT_HEAD`
-- `ASSET_MANAGER`
-- `ADMIN`
-
-Examples of role enforcement:
-- `POST /api/allocations` requires `ASSET_MANAGER` or `ADMIN`
-- `PATCH /api/maintenance/:id/status` requires `ASSET_MANAGER` or `ADMIN`
-- `PATCH /api/transfers/:id/approve` requires `ASSET_MANAGER`, `DEPT_HEAD`, or `ADMIN`
-- `POST /api/admin/users/:id/role` requires `ADMIN`
-- `POST /api/audits/close` requires `ADMIN`
-
----
-
-## API Endpoints
+## Main API endpoints
 
 ### Health
 - `GET /health`
 
-### Auth
+### Authentication
 - `POST /api/auth/signup`
-  - body: `{ name, email, password }`
 - `POST /api/auth/login`
-  - body: `{ email, password }`
 - `GET /api/auth/me`
 
 ### Admin
 - `PATCH /api/admin/users/:id/role`
-  - body: `{ role }`
-  - allowed roles in the handler: `DEPT_HEAD`, `ASSET_MANAGER`
 
 ### Allocations
 - `POST /api/allocations`
@@ -125,20 +120,34 @@ Examples of role enforcement:
 ### Audits
 - `POST /api/audits/close`
 
----
+## Authentication and roles
 
-## Cron Workers
-A daily cron job (runs at `00:00` each day) does:
-- Finds allocations with `status = ACTIVE` and `expectedReturnDate < now()`
-- Updates those allocations to `status = OVERDUE`
-- Creates notifications for the overdue allocations
+Authenticated requests should include:
 
----
+```http
+Authorization: Bearer <token>
+```
 
-## Database (Prisma)
-PostgreSQL schema is defined in `backend/prisma/schema.prisma`.
+The backend supports these roles:
 
-Notes:
-- The repository currently includes an initial migration under `backend/prisma/migrations/`.
-- Follow `backend/prisma/migrations/*/README.md` for migration notes.
+- `EMPLOYEE`
+- `DEPT_HEAD`
+- `ASSET_MANAGER`
+- `ADMIN`
+
+Examples of protected actions include:
+
+- Creating allocations requires `ASSET_MANAGER` or `ADMIN`
+- Updating maintenance status requires `ASSET_MANAGER` or `ADMIN`
+- Approving transfers requires `ASSET_MANAGER`, `DEPT_HEAD`, or `ADMIN`
+- Updating user roles requires `ADMIN`
+- Closing audits requires `ADMIN`
+
+## Database and migrations
+
+The Prisma schema lives in `backend/prisma/schema.prisma` and the migration history is stored in `backend/prisma/migrations/`.
+
+## Cron worker
+
+The backend starts a daily cron job at midnight that looks for active allocations whose expected return date has passed and marks them as overdue, while also creating notification records for those items.
 
