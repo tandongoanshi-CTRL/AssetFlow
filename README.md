@@ -2,7 +2,7 @@
 
 ODOO HACKATHON 2026
 
-AssetFlow is an assets lifecycle backend (Node.js + TypeScript + Express + Prisma/PostgreSQL). It supports:
+AssetFlow is an assets lifecycle project (Node.js + TypeScript + Express + Prisma/PostgreSQL). It supports:
 - Authentication (JWT)
 - Role-based access control (RBAC)
 - Asset allocations, transfers, bookings, maintenance requests
@@ -17,7 +17,15 @@ AssetFlow is an assets lifecycle backend (Node.js + TypeScript + Express + Prism
 
 ---
 
-## Quickstart (Backend)
+## Quickstart (Full Stack)
+
+AssetFlow is split into:
+- Backend: `backend/` (Express + Prisma)
+- Frontend: `frontend/` (React + Vite)
+
+---
+
+## Backend
 
 ### 1) Set environment variables
 Create a `.env` file in `backend/`:
@@ -40,6 +48,7 @@ npm run prisma:generate
 ```
 
 ### 3) Run
+
 ```bash
 npm run dev
 ```
@@ -47,6 +56,12 @@ npm run dev
 Cron workers are started automatically when the server boots.
 
 ---
+
+## Frontend
+
+Follow `frontend/README.md` for how to set `frontend/.env` and run the dev server.
+
+
 
 ## Authentication
 - Endpoints that require authentication expect:
