@@ -1,0 +1,269 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  EMPLOYEE
+  DEPT_HEAD
+  ASSET_MANAGER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum DepartmentStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum AssetState {
+  AVAILABLE
+  ALLOCATED
+  RESERVED
+  UNDER_MAINTENANCE
+  LOST
+  RETIRED
+  DISPOSED
+}
+
+enum AllocationStatus {
+  ACTIVE
+  RETURNED
+  OVERDUE
+}
+
+enum TransferStatus {
+  REQUESTED
+  APPROVED
+  REJECTED
+}
+
+enum BookingStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum MaintenancePriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum MaintenanceStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  TECHNICIAN_ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum AuditStatus {
+  DRAFT
+  ACTIVE
+  CLOSED
+}
+
+enum VerificationStatus {
+  UNVERIFIED
+  VERIFIED
+  MISSING
+  DAMAGED
+}
+
+model User {
+  id             String      @id @default(uuid()) @db.Uuid
+  name           String
+  email          String      @unique
+  passwordHash   String      @map("password_hash")
+  departmentId   String?     @map("department_id") @db.Uuid
+  department     Department? @relation("DepartmentMembers", fields: [departmentId], references: [id])
+  role           Role        @default(EMPLOYEE)
+  status         UserStatus  @default(ACTIVE)
+  createdAt      DateTime    @default(now()) @map("created_at")
+  updatedAt      DateTime    @updatedAt @map("updated_at")
+
+  allocatedAssets      Allocation[]         @relation("AllocationAssignedUser")
+  requestedTransfers   TransferRequest[]    @relation("TransferRequestRequester")
+  targetTransfers      TransferRequest[]    @relation("TransferRequestTargetUser")
+  bookings             ResourceBooking[]    @relation("BookingBookedBy")
+  maintenanceRequests  MaintenanceRequest[] @relation("MaintenanceRaisedBy")
+  auditItems           AuditItem[]          @relation("AuditItemAuditor")
+  departmentHeadOf     Department[]         @relation("DepartmentHead")
+  notifications        Notification[]       @relation("UserNotifications")
+
+  @@map("users")
+}
+
+model Department {
+  id                  String           @id @default(uuid()) @db.Uuid
+  name                String
+  parentDepartmentId  String?          @map("parent_department_id") @db.Uuid
+  parentDepartment    Department?      @relation("DepartmentHierarchy", fields: [parentDepartmentId], references: [id])
+  subDepartments      Department[]     @relation("DepartmentHierarchy")
+  departmentHeadId    String?          @map("department_head_id") @db.Uuid
+  departmentHead      User?            @relation("DepartmentHead", fields: [departmentHeadId], references: [id])
+  status              DepartmentStatus @default(ACTIVE)
+  createdAt           DateTime         @default(now()) @map("created_at")
+  updatedAt           DateTime         @updatedAt @map("updated_at")
+
+  members             User[]            @relation("DepartmentMembers")
+  allocations         Allocation[]      @relation("AllocationDepartment")
+  transferTargets     TransferRequest[] @relation("TransferRequestTargetDepartment")
+
+  @@map("departments")
+}
+
+model AssetCategory {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String
+  description  String?
+  customFields Json?    @map("custom_fields")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  assets       Asset[]
+
+  @@map("asset_categories")
+}
+
+model Asset {
+  id                String      @id @default(uuid()) @db.Uuid
+  name              String
+  categoryId        String      @map("category_id") @db.Uuid
+  category          AssetCategory @relation(fields: [categoryId], references: [id])
+  assetTag          String      @unique @map("asset_tag")
+  serialNumber      String?     @map("serial_number")
+  acquisitionDate   DateTime?   @map("acquisition_date") @db.Date
+  acquisitionCost   Decimal?    @map("acquisition_cost") @db.Decimal(12, 2)
+  condition         String?
+  location          String?
+  isBookable        Boolean     @default(false) @map("is_bookable")
+  state             AssetState  @default(AVAILABLE)
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+
+  allocations       Allocation[]
+  transferRequests  TransferRequest[]
+  resourceBookings  ResourceBooking[]
+  maintenanceRequests MaintenanceRequest[]
+  auditItems        AuditItem[]
+
+  @@map("assets")
+}
+
+model Allocation {
+  id                    String            @id @default(uuid()) @db.Uuid
+  assetId               String            @map("asset_id") @db.Uuid
+  asset                 Asset             @relation(fields: [assetId], references: [id])
+  assignedToUserId      String?           @map("assigned_to_user_id") @db.Uuid
+  assignedToUser        User?             @relation("AllocationAssignedUser", fields: [assignedToUserId], references: [id])
+  assignedToDepartmentId String?          @map("assigned_to_department_id") @db.Uuid
+  assignedToDepartment  Department?       @relation("AllocationDepartment", fields: [assignedToDepartmentId], references: [id])
+  expectedReturnDate    DateTime?         @map("expected_return_date")
+  returnedAt            DateTime?         @map("returned_at")
+  conditionCheckInNotes String?           @map("condition_check_in_notes")
+  status                AllocationStatus  @default(ACTIVE)
+  createdAt             DateTime          @default(now()) @map("created_at")
+  updatedAt             DateTime          @updatedAt @map("updated_at")
+
+  @@map("allocations")
+}
+
+model TransferRequest {
+  id                  String         @id @default(uuid()) @db.Uuid
+  assetId             String         @map("asset_id") @db.Uuid
+  asset               Asset          @relation(fields: [assetId], references: [id])
+  requestedById       String         @map("requested_by_id") @db.Uuid
+  requestedBy         User           @relation("TransferRequestRequester", fields: [requestedById], references: [id])
+  targetUserId        String?        @map("target_user_id") @db.Uuid
+  targetUser          User?          @relation("TransferRequestTargetUser", fields: [targetUserId], references: [id])
+  targetDepartmentId  String?        @map("target_department_id") @db.Uuid
+  targetDepartment    Department?    @relation("TransferRequestTargetDepartment", fields: [targetDepartmentId], references: [id])
+  status              TransferStatus @default(REQUESTED)
+  createdAt           DateTime       @default(now()) @map("created_at")
+  updatedAt           DateTime       @updatedAt @map("updated_at")
+
+  @@map("transfer_requests")
+}
+
+model ResourceBooking {
+  id             String        @id @default(uuid()) @db.Uuid
+  assetId        String        @map("asset_id") @db.Uuid
+  asset          Asset         @relation(fields: [assetId], references: [id])
+  bookedById     String        @map("booked_by_id") @db.Uuid
+  bookedBy       User          @relation("BookingBookedBy", fields: [bookedById], references: [id])
+  startDatetime  DateTime      @map("start_datetime")
+  endDatetime    DateTime      @map("end_datetime")
+  status         BookingStatus @default(UPCOMING)
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+
+  @@map("resource_bookings")
+}
+
+model MaintenanceRequest {
+  id           String               @id @default(uuid()) @db.Uuid
+  assetId      String               @map("asset_id") @db.Uuid
+  asset        Asset                @relation(fields: [assetId], references: [id])
+  raisedById   String               @map("raised_by_id") @db.Uuid
+  raisedBy     User                 @relation("MaintenanceRaisedBy", fields: [raisedById], references: [id])
+  description  String
+  priority     MaintenancePriority  @default(MEDIUM)
+  status       MaintenanceStatus    @default(PENDING)
+  createdAt    DateTime             @default(now()) @map("created_at")
+  updatedAt    DateTime             @updatedAt @map("updated_at")
+
+  @@map("maintenance_requests")
+}
+
+model AuditCycle {
+  id                 String       @id @default(uuid()) @db.Uuid
+  name               String
+  scopeDepartmentId  String?      @map("scope_department_id") @db.Uuid
+  scopeLocation      String?      @map("scope_location")
+  status             AuditStatus  @default(DRAFT)
+  createdAt          DateTime     @default(now()) @map("created_at")
+  updatedAt          DateTime     @updatedAt @map("updated_at")
+
+  auditItems         AuditItem[]
+
+  @@map("audit_cycles")
+}
+
+model AuditItem {
+  id                 String             @id @default(uuid()) @db.Uuid
+  auditCycleId       String             @map("audit_cycle_id") @db.Uuid
+  auditCycle         AuditCycle         @relation(fields: [auditCycleId], references: [id])
+  assetId            String             @map("asset_id") @db.Uuid
+  asset              Asset              @relation(fields: [assetId], references: [id])
+  auditorId          String             @map("auditor_id") @db.Uuid
+  auditor            User               @relation("AuditItemAuditor", fields: [auditorId], references: [id])
+  verificationStatus VerificationStatus @default(UNVERIFIED) @map("verification_status")
+  createdAt          DateTime           @default(now()) @map("created_at")
+  updatedAt          DateTime           @updatedAt @map("updated_at")
+
+  @@map("audit_items")
+}
+
+model Notification {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String?  @map("user_id") @db.Uuid
+  user      User?    @relation("UserNotifications", fields: [userId], references: [id])
+  title     String
+  message   String
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("notifications")
+}

@@ -1,0 +1,34 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.app = void 0;
+const cors_1 = __importDefault(require("cors"));
+const express_1 = __importDefault(require("express"));
+const helmet_1 = __importDefault(require("helmet"));
+const env_1 = require("./env");
+const auth_routes_1 = require("./routes/auth.routes");
+const admin_routes_1 = require("./routes/admin.routes");
+const allocations_routes_1 = require("./routes/allocations.routes");
+const transfers_routes_1 = require("./routes/transfers.routes");
+const bookings_routes_1 = require("./routes/bookings.routes");
+const maintenance_routes_1 = require("./routes/maintenance.routes");
+const audits_routes_1 = require("./routes/audits.routes");
+const app = (0, express_1.default)();
+exports.app = app;
+app.use((0, helmet_1.default)());
+app.use((0, cors_1.default)({ origin: env_1.env.corsOrigin }));
+app.use(express_1.default.json({ limit: '1mb' }));
+app.get('/health', (_req, res) => res.json({ ok: true }));
+app.use('/api/auth', auth_routes_1.authRouter);
+app.use('/api/admin', admin_routes_1.adminRouter);
+app.use('/api/allocations', allocations_routes_1.allocationsRouter);
+app.use('/api/transfers', transfers_routes_1.transfersRouter);
+app.use('/api/bookings', bookings_routes_1.bookingsRouter);
+app.use('/api/maintenance', maintenance_routes_1.maintenanceRouter);
+app.use('/api/audits', audits_routes_1.auditsRouter);
+app.use((err, _req, res, _next) => {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+});
